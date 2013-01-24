@@ -6,14 +6,14 @@ describe T9Hash do
     T9Hash.new("foobar")
   end
 
-  context "after the dictionary is loaded" do
+  context "after the dictionary is loaded" do #this is dummy data. This sets the environment for the test that follow
     before(:each) do
       @t9_hash  = T9Hash.new("43556")
     end
 
     it "should translate a hash into an array of letters" do
-      @t9_hash.should_receive(:perform_lookup)
-      @t9_hash.to_words
+      @t9_hash.should_receive(:perform_lookup) #this line wants to "perform lookup"
+      @t9_hash.to_words #if it runs "to_words" that means "perform lookup" is in "to_words"
     end
 
     it "should combine an array of letters into word combinations" do
@@ -24,7 +24,7 @@ describe T9Hash do
     end
 
     it "should convert the hash into the possible word combinations" do
-      @t9_hash.stub(:combine_letters).and_return(["hi", "madeupword"])
+      @t9_hash.stub(:combine_letters).and_return(["hi", "madeupword"]) #hash.stub gives us back a hash
       @t9_hash.should_receive(:filter_against_dictionary).with(["hi", "madeupword"])
       @t9_hash.to_words
     end
